@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ConnectedRouter } from "connected-react-router";
+import React from "react";
+import { Provider } from "react-redux";
+import { Route, Switch } from "react-router";
+import Landing from "./containers/Landing";
+import NoteDetail from "./containers/NoteDetail";
+import { history, store } from "./store";
+import { Routes } from "./utils/routes";
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export default () => (
+  <Provider store={store}>
+    <CssBaseline />
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path={Routes.LANDING} component={Landing} />
+        <Route exact path={Routes.NOTE_DETAIL} component={NoteDetail} />
+      </Switch>
+    </ConnectedRouter>
+  </Provider>
+);
